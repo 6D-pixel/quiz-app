@@ -54,7 +54,7 @@ export default function Question() {
     setChecked(false);
   }
   //store local
-  localStorage.setItem("quizScore", JSON.stringify(result));
+  // localStorage.setItem("quizScore", JSON.stringify(result));
   return (
     <section className="flex justify-center">
       <div
