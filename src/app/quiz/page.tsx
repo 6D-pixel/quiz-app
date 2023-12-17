@@ -6,7 +6,7 @@ import { list } from "postcss";
 import Link from "next/link";
 export default function Question() {
   const [activeQuestion, setActiveQuestion] = useState(0);
-  const [selectedAnswer, setSeletedAnswer] = useState("");
+  const [selectedAnswer, setSeletedAnswer] = useState<boolean | string>("");
   const [checked, setChecked] = useState(false);
   const [selectedAnswerIndex, setSeletedAnswerIndex] = useState(null);
   const [showresult, setShowResult] = useState(false);
@@ -19,7 +19,7 @@ export default function Question() {
   const { questions } = quiz;
   const { question, answers, correctAnswer } = questions[activeQuestion];
   //select and check answer
-  const onAnswerSelected = (answer, idx) => {
+  const onAnswerSelected = (answer: any, idx: any) => {
     setChecked(true);
     setSeletedAnswerIndex(idx);
     if (answer === correctAnswer) {
@@ -36,14 +36,14 @@ export default function Question() {
     setResult((prev) =>
       selectedAnswer
         ? {
-          ...prev,
-          score: prev.score + 5,
-          correctanswer: prev.correctanswer + 1,
-        }
+            ...prev,
+            score: prev.score + 5,
+            correctanswer: prev.correctanswer + 1,
+          }
         : {
-          ...prev,
-          wronganswer: prev.wronganswer + 1,
-        }
+            ...prev,
+            wronganswer: prev.wronganswer + 1,
+          }
     );
     if (activeQuestion !== questions.length - 1) {
       setActiveQuestion((prev) => prev + 1);
@@ -54,7 +54,7 @@ export default function Question() {
     setChecked(false);
   }
   //store local
-  localStorage.setItem('quizScore', JSON.stringify(result));
+  localStorage.setItem("quizScore", JSON.stringify(result));
   return (
     <section className="flex justify-center">
       <div
