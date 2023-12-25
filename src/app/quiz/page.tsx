@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { quiz } from "./data";
 import { link } from "fs";
 import { list } from "postcss";
@@ -15,7 +15,13 @@ export default function Question() {
     correctanswer: 0,
     wronganswer: 0,
   });
-
+  useEffect(() => {
+    async () => {
+      const response = await fetch("");
+      const data = await response.json();
+      console.log(data);
+    };
+  }, []);
   const { questions } = quiz;
   const { question, answers, correctAnswer } = questions[activeQuestion];
   //select and check answer
