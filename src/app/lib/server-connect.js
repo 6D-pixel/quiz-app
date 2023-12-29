@@ -1,20 +1,17 @@
 const mongoose = require("mongoose");
-require("dotenv").config({ path: ".env.local" });
+require("dotenv").config({ path: "../../../.env.local" });
 
 
-export default async function connectToMongoDB() {
+async function connectToMongoDB() {
   try {
-    await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false
-    });
+      await mongoose.connect(process.env.MONGODB_URI);
     console.log('Connected to MongoDB');
   } catch (err) {
     console.error('Error connecting to MongoDB:', err);
   }
 }
+
+module.exports = connectToMongoDB;
 
 
 
