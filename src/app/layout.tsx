@@ -1,25 +1,26 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
-import Header from './component/header'
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import Header from "./component/header";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Quiz App',
-  description: 'Quiz app test your skills',
-}
+  title: "Quiz App",
+  description: "Quiz app test your skills",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header/>
-        {children}</body>
+        <Header />
+        {children}
+      </body>
     </html>
-  )
+  );
 }

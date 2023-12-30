@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { quiz } from "./data";
 import { link } from "fs";
 import { list } from "postcss";
 import Link from "next/link";
