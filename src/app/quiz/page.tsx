@@ -4,26 +4,40 @@ import { quiz } from "./data";
 import { link } from "fs";
 import { list } from "postcss";
 import Link from "next/link";
+import Loding from "./loding";
+import connectToMongoDB from "../lib/server-connect";
+
 export default function Question() {
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [selectedAnswer, setSeletedAnswer] = useState<boolean | string>("");
   const [checked, setChecked] = useState(false);
   const [selectedAnswerIndex, setSeletedAnswerIndex] = useState(null);
   const [showresult, setShowResult] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [result, setResult] = useState({
     score: 0,
     correctanswer: 0,
     wronganswer: 0,
   });
+  const [data, setData] = useState(null);
   useEffect(() => {
-    async () => {
-      const response = await fetch("");
-      const data = await response.json();
-      console.log(data);
+    const fetchdata = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/questions");
+        const data = await response.json();
+        setData(data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
     };
+    fetchdata();
   }, []);
-  const { questions } = quiz;
-  const { question, answers, correctAnswer } = questions[activeQuestion];
+  if(!data){
+    return <Loding/>
+  }
+  const { questions }: any = data[0]; //need to pass in through props
+  const { question, answers, correctAnswer }: any = questions[activeQuestion];
   //select and check answer
   const onAnswerSelected = (answer: any, idx: any) => {
     setChecked(true);
@@ -61,7 +75,7 @@ export default function Question() {
   }
   //store local
   // localStorage.setItem("quizScore", JSON.stringify(result));
-  return (
+  return (<div>{loading?(<Loding/>):(
     <section className="flex justify-center">
       <div
         className="mt-40  h-40 w-4/5 sm:w-1/2 sm:h-[15.5rem] bg-blue-300 rounded-xl 
@@ -77,7 +91,7 @@ export default function Question() {
               <h2 className="m-2 font-bold tracking-wide">
                 {questions[activeQuestion].question}
               </h2>
-              {answers.map((answer, idx) => (
+              {answers.map((answer: any, idx: any) => (
                 <li
                   key={idx}
                   onClick={() => onAnswerSelected(answer, idx)}
@@ -182,6 +196,6 @@ export default function Question() {
           )}
         </div>
       </div>
-    </section>
+    </section>)}</div>
   );
 }
