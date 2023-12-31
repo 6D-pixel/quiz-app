@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
-require("dotenv").config({ path: "../../../.env.local" });
 
 async function connectToMongoDB() {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
+    console.log("Connected to MongoDB");
   } catch (err) {
     console.error("Error connecting to MongoDB:", err);
   }
