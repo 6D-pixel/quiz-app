@@ -22,7 +22,7 @@ export default function Question() {
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/questions");
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/questions`);
         const data = await response.json();
         setData(data);
         setLoading(false);
