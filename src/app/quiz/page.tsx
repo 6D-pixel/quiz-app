@@ -81,7 +81,7 @@ export default function Question() {
       ) : (
         <section className="flex justify-center">
           <div
-            className="mt-40  h-40 w-4/5 sm:w-1/2 sm:h-[15.5rem] bg-blue-300 rounded-xl 
+            className="mt-40 w-4/5 sm:w-1/2 sm:h-[15.5rem] bg-blue-300 rounded-xl 
       drop-shadow-[10px_5px_2px_rgba(0,0,0,0.25)] border-solid border-2 border-gray-400"
           >
             <div>
